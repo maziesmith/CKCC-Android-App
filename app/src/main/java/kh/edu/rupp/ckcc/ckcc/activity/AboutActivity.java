@@ -1,6 +1,7 @@
 package kh.edu.rupp.ckcc.ckcc.activity;
 
 import android.app.Activity;
+import android.os.Bundle;
 
 /**
  * CKCC
@@ -8,4 +9,9 @@ import android.app.Activity;
  */
 
 public class AboutActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 }
