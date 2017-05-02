@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    private void sendDataToServer(String data){
+        // Just a test function for Git
+    }
+
     private void onNewsClick() {
         /*FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
