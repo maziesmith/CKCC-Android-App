@@ -3,6 +3,7 @@ package kh.edu.rupp.ckcc.ckcc.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import kh.edu.rupp.ckcc.ckcc.R;
 import kh.edu.rupp.ckcc.ckcc.fragment.FeedbackFragment;
@@ -21,7 +24,7 @@ import kh.edu.rupp.ckcc.ckcc.fragment.ProfileFragment;
  * Created by leapkh on 23/3/17.
  */
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private DrawerLayout drawerLayout;
 
@@ -43,6 +46,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
+        // Navigation header view
+        View headerView = navigationView.getHeaderView(0);
+        TextView txtUsername = (TextView)headerView.findViewById(R.id.txt_username);
+        SharedPreferences preferences = getSharedPreferences(LoginActivity.PREFERENCE_NAME, MODE_PRIVATE);
+        String username = preferences.getString(LoginActivity.KEY_USERNAME, null);
+        txtUsername.setText(username);
+
+        TextView txtLogout = (TextView)headerView.findViewById(R.id.txt_logout);
+        txtLogout.setOnClickListener(this);
     }
 
     private void sendDataToServer(String data){
@@ -115,5 +127,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.txt_logout){
+            SharedPreferences preferences = getSharedPreferences(LoginActivity.PREFERENCE_NAME, MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove(LoginActivity.KEY_USERNAME);
+            editor.commit();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

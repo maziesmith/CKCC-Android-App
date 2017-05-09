@@ -21,6 +21,7 @@
     <TextView
         android:textColor="@android:color/white"
         android:layout_width="wrap_content"
+        android:id="@+id/txt_username"
         android:layout_height="wrap_content"
         android:layout_above="@id/txt_email"
         android:text="Sok Sao" />
@@ -29,6 +30,7 @@
         android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/txt_logout"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="Logout" />
