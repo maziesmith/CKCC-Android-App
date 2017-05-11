@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import kh.edu.rupp.ckcc.ckcc.R;
 import kh.edu.rupp.ckcc.ckcc.adapter.NewsAdapter;
 import kh.edu.rupp.ckcc.ckcc.datamodel.Article;
+import kh.edu.rupp.ckcc.ckcc.db.DbManager;
 
 /**
  * CKCC
@@ -31,22 +32,13 @@ public class NewsActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Temporary Generated Articles
-        Article article1 = new Article();
-        article1.setTitle("Article 1");
-        article1.setDate("25 April 17");
+        //Temporary insert
+        Article article = new Article(0, "News 1", "This is news 1", 0, "");
 
-        Article article2 = new Article();
-        article2.setTitle("Article 2");
-        article2.setDate("24 April 17");
 
-        Article article3 = new Article();
-        article3.setTitle("Article 3");
-        article3.setDate("23 April 17");
-
-        String atricle9 = "This is article";
-
-        Article[] articles = {article1, article2, article3};
+        DbManager dbManager = new DbManager(this, null, null, 1);
+        dbManager.insertArticle(article);
+        Article[] articles = dbManager.getAllArticles();
 
         // Adapter
         NewsAdapter adapter = new NewsAdapter();
